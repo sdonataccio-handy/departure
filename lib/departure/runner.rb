@@ -26,7 +26,7 @@ module Departure
     #
     # @param sql [String]
     def query(sql)
-      if alter_statement?(sql)
+      if alter_statement?(sql) && !rename_column_statement?(sql)
         command = cli_generator.parse_statement(sql)
         execute(command)
       else
@@ -64,6 +64,16 @@ module Departure
     # @return [Boolean]
     def alter_statement?(sql)
       sql =~ /\Aalter table/i
+    end
+
+    # Checks whether the sql statement is an ALTER TABLE CHANGE COLUMN
+    #
+    # @param sql [String]
+    # @return [Boolean]
+    def rename_column_statement?(sql)
+      match = sql.match(/ CHANGE `(\w+)` `(\w+)` /)
+
+      match.present? && match.captures[0] != match.captures[1]
     end
 
     # Logs the start and end of the execution
