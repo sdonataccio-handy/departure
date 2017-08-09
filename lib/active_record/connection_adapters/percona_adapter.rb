@@ -12,7 +12,10 @@ module ActiveRecord
       mysql2_connection = mysql2_connection(config)
 
       verbose = ActiveRecord::Migration.verbose
-      percona_logger = Departure::LoggerFactory.build(verbose: verbose)
+      sanitizers = [
+        Departure::LogSanitizers::PasswordSanitizer.new(config)
+      ]
+      percona_logger = Departure::LoggerFactory.build(sanitizers: sanitizers, verbose: verbose)
       cli_generator = Departure::CliGenerator.new(config)
 
       runner = Departure::Runner.new(

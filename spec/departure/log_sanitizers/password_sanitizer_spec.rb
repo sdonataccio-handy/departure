@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Departure::LogSanitizers::PasswordSanitizer do
-  subject(:password_sanitizer) { described_class.new(connection_details) }
+  subject(:password_sanitizer) { described_class.new(config) }
 
   let(:password_argument) { '-p secret_password' }
-  let(:connection_details) { double(:connection_details, password_argument: password_argument) }
+  let(:config) { { 'password' => 'secret_password' } }
 
   describe '#execute' do
     let(:text) { "pt-online-tools #{password_argument} execute alter table" }

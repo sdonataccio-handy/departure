@@ -3,10 +3,8 @@ module Departure
     class PasswordSanitizer
       PASSWORD_REPLACEMENT = '[filtered_password]'
 
-      delegate :password_argument, to: :connection_details
-
-      def initialize(connection_details)
-        @connection_details = connection_details
+      def initialize(config)
+        @config = config
       end
 
       def execute(log_statement)
@@ -15,7 +13,10 @@ module Departure
       end
 
       private
-      attr_accessor :connection_details
+
+      def password_argument
+        @config['password']
+      end
     end
   end
 end
