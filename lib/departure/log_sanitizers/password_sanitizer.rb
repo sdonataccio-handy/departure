@@ -15,7 +15,7 @@ module Departure
       private
 
       def password_argument
-        @config['password']
+        @config.with_indifferent_access[:password]
       end
     end
   end
