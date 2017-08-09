@@ -6,9 +6,9 @@ module Departure
     #
     # @param verbose [Boolean]
     # @return [#say, #write]
-    def self.build(verbose: true)
+    def self.build(sanitizers: [], verbose: true)
       if verbose
-        Departure::Logger.new
+        Departure::Logger.new(sanitizers)
       else
         Departure::NullLogger.new
       end
