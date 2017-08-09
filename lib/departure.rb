@@ -2,6 +2,7 @@ require 'active_record'
 require 'active_support/all'
 
 require 'departure/version'
+require 'departure/log_sanitizers/password_sanitizer'
 require 'departure/runner'
 require 'departure/cli_generator'
 require 'departure/logger'
