@@ -144,4 +144,22 @@ describe Departure::Runner do
       end
     end
   end
+
+  describe '#rename_column_statement?' do
+    context 'rename statement' do
+      let(:sql) { 'ALTER TABLE `t` CHANGE `n1` `n2` int DEFAULT NULL' }
+
+      it 'returns true' do
+        expect(runner.send(:rename_column_statement?, sql)).to eq true
+      end
+    end
+
+    context 'change type statement' do
+      let(:sql) { 'ALTER TABLE `t` CHANGE `n1` `n1` int DEFAULT NULL' }
+
+      it 'returns false' do
+        expect(runner.send(:rename_column_statement?, sql)).to eq false
+      end
+    end
+  end
 end
