@@ -33,8 +33,8 @@ module Departure
     BASE_OPTIONS = %w(
       --execute
       --statistics
-      --recursion-method=none
-      --alter-foreign-keys-method=auto
+      --alter-foreign-keys-method=rebuild_constraints
+      --chunk-time=1
     )
 
     # Constructor

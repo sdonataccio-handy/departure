@@ -63,7 +63,7 @@ describe Departure::CliGenerator do
       it { is_expected.to include('pt-online-schema-change') }
       it { is_expected.not_to include('ALTER TABLE') }
       it { is_expected.to include('--execute') }
-      it { is_expected.to include('--alter-foreign-keys-method=auto') }
+      it { is_expected.to include('--alter-foreign-keys-method=rebuild_constraints') }
 
       it { is_expected.to include("t=#{table_name}") }
       it { is_expected.to include("D=#{connection_data[:database]}") }
@@ -113,7 +113,7 @@ describe Departure::CliGenerator do
       it { is_expected.to include('pt-online-schema-change') }
       it { is_expected.not_to include('ALTER TABLE') }
       it { is_expected.to include('--execute') }
-      it { is_expected.to include('--alter-foreign-keys-method=auto') }
+      it { is_expected.to include('--alter-foreign-keys-method=rebuild_constraints') }
 
       it { is_expected.to include("t=#{table_name}") }
       it { is_expected.to include("D=#{connection_data[:database]}") }
